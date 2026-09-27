@@ -131,6 +131,9 @@ function checkPassword() {
     // Analysis
     document.getElementById("analysis").innerHTML =
         "<br>Password Analysis:<br><br>" + analysis;
+
+    // Breach Detection
+    checkBreach(password);
 }
 
 
@@ -158,5 +161,84 @@ function toggleTheme() {
         button.innerHTML = "☀️ Light Mode";
     } else {
         button.innerHTML = "🌙 Dark Mode";
+    }
+}
+
+
+// Breach Detection
+async function checkBreach(password) {
+
+    const breachResult = document.getElementById("breach-result");
+
+    breachResult.innerHTML =
+        "🔍 Checking known data breaches...";
+
+    try {
+
+        const data = new TextEncoder().encode(password);
+
+        const hashBuffer = await crypto.subtle.digest(
+            "SHA-1",
+            data
+        );
+
+        const hashArray = Array.from(
+            new Uint8Array(hashBuffer)
+        );
+
+        const hash = hashArray
+            .map(byte => byte.toString(16).padStart(2, "0"))
+            .join("")
+            .toUpperCase();
+
+        const prefix = hash.substring(0, 5);
+        const suffix = hash.substring(5);
+
+        const response = await fetch(
+            "https://api.pwnedpasswords.com/range/" + prefix
+        );
+
+        if (!response.ok) {
+            throw new Error("API request failed");
+        }
+
+        const result = await response.text();
+
+        const lines = result.split("\n");
+
+        let found = false;
+        let count = 0;
+
+        for (let line of lines) {
+
+            const parts = line.trim().split(":");
+
+            if (parts[0] === suffix) {
+                found = true;
+                count = parts[1];
+                break;
+            }
+        }
+
+        if (found) {
+
+            breachResult.innerHTML =
+                "⚠️ Breach Detection: FOUND<br>" +
+                "This password has appeared in known data breaches.<br>" +
+                "Times seen: " + count;
+
+        } else {
+
+            breachResult.innerHTML =
+                "✅ Breach Detection: NOT FOUND<br>" +
+                "No known breach record was found for this password.";
+
+        }
+
+    } catch (error) {
+
+        breachResult.innerHTML =
+            "⚠️ Breach Detection: Unable to check right now.";
+
     }
 }
