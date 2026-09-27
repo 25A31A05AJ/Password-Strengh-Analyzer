@@ -90,3 +90,12 @@ function checkPassword() {
     document.getElementById("analysis").innerHTML =
         "<br>Password Analysis:<br><br>" + analysis;
 }
+function togglePassword() {
+    const password = document.getElementById("password");
+
+    if (password.type === "password") {
+        password.type = "text";
+    } else {
+        password.type = "password";
+    }
+}
