@@ -177,3 +177,79 @@ button:hover {
     transform: translateY(-35%);
     background: transparent;
 }
+.dark-mode {
+    background: linear-gradient(135deg, #111827, #312e81, #4c1d95);
+}
+
+.dark-mode .container {
+    background: rgba(31, 41, 55, 0.97);
+}
+
+.dark-mode h1 {
+    color: #c4b5fd;
+}
+
+.dark-mode p {
+    color: #d1d5db;
+}
+
+.dark-mode input {
+    background: #111827;
+    color: white;
+    border-color: #8b5cf6;
+}
+
+.dark-mode input::placeholder {
+    color: #9ca3af;
+}
+
+.dark-mode #analysis {
+    background: #111827;
+    color: #e5e7eb;
+}
+
+.theme-button {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+
+    width: auto;
+    padding: 10px 15px;
+
+    margin: 0;
+
+    border-radius: 10px;
+
+    background: white;
+    color: #6a11cb;
+
+    font-size: 14px;
+    font-weight: bold;
+
+    cursor: pointer;
+    border: none;
+}
+
+.theme-button:hover {
+    transform: scale(1.05);
+}
+
+.dark-mode .theme-button {
+    background: #374151;
+    color: white;
+}
+.container {
+    animation: fadeIn 0.8s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
