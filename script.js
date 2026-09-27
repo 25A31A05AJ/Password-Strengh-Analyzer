@@ -99,3 +99,14 @@ function togglePassword() {
         password.type = "password";
     }
 }
+function toggleTheme() {
+    document.body.classList.toggle("dark-mode");
+
+    const button = document.querySelector(".theme-button");
+
+    if (document.body.classList.contains("dark-mode")) {
+        button.innerHTML = "☀️ Light Mode";
+    } else {
+        button.innerHTML = "🌙 Dark Mode";
+    }
+}
