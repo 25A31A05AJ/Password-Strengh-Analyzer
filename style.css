@@ -291,3 +291,36 @@ button:hover {
 .dark-mode .tips p {
     color: #d1d5db;
 }
+.privacy-note {
+    margin-top: 20px;
+    padding: 15px;
+
+    background: #ecfdf5;
+    border-radius: 12px;
+
+    border-left: 5px solid #10b981;
+
+    text-align: left;
+
+    color: #065f46;
+}
+
+.privacy-note strong {
+    font-size: 16px;
+}
+
+.privacy-note p {
+    margin: 8px 0 0;
+    color: #047857;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.dark-mode .privacy-note {
+    background: #064e3b;
+    border-left-color: #34d399;
+}
+
+.dark-mode .privacy-note p {
+    color: #a7f3d0;
+}
