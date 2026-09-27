@@ -10,6 +10,7 @@ function checkPassword() {
         document.getElementById("analysis").innerHTML = "";
         document.getElementById("strength-fill").style.width = "0%";
         document.getElementById("strength-percent").innerText = "0%";
+        document.getElementById("breach-result").innerHTML = "";
         return;
     }
 
