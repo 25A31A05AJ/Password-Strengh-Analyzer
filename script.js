@@ -2,6 +2,27 @@ function checkPassword() {
 
     let password = document.getElementById("password").value;
     let score = 0;
+let hasSequence = false;
+
+for (let i = 0; i < password.length - 2; i++) {
+    let a = password.charCodeAt(i);
+    let b = password.charCodeAt(i + 1);
+    let c = password.charCodeAt(i + 2);
+
+    if ((b === a + 1 && c === b + 1) ||
+        (b === a - 1 && c === b - 1)) {
+        hasSequence = true;
+        break;
+    }
+}
+
+if (hasSequence) {
+    messages.push("⚠️ Sequential Pattern: Detected");
+} else {
+    messages.push("✓ Sequential Pattern: Not Detected");
+}
+
+    
     let analysis = "";
 
     if (password.length === 0) {
