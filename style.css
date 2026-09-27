@@ -145,3 +145,35 @@ button:hover {
 .strong {
     color: #16a34a;
 }
+.password-box {
+    position: relative;
+    width: 100%;
+}
+
+.password-box input {
+    padding-right: 50px;
+}
+
+.password-box button {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-35%);
+
+    width: 40px;
+    padding: 8px;
+
+    margin: 0;
+
+    background: transparent;
+    color: #6a11cb;
+
+    font-size: 20px;
+    border: none;
+    cursor: pointer;
+}
+
+.password-box button:hover {
+    transform: translateY(-35%);
+    background: transparent;
+}
