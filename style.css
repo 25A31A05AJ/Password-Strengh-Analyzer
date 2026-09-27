@@ -253,3 +253,41 @@ button:hover {
         transform: translateY(0);
     }
 }
+.tips {
+    margin-top: 25px;
+    padding: 18px;
+
+    background: linear-gradient(135deg, #eef2ff, #f5f3ff);
+    border-radius: 15px;
+
+    text-align: left;
+
+    border-left: 5px solid #8e54e9;
+}
+
+.tips h3 {
+    margin-top: 0;
+    margin-bottom: 12px;
+
+    color: #6a11cb;
+    font-size: 18px;
+}
+
+.tips p {
+    margin: 7px 0;
+    color: #444;
+    font-size: 14px;
+}
+
+.dark-mode .tips {
+    background: #111827;
+    border-left-color: #a78bfa;
+}
+
+.dark-mode .tips h3 {
+    color: #c4b5fd;
+}
+
+.dark-mode .tips p {
+    color: #d1d5db;
+}
