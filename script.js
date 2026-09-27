@@ -2,27 +2,6 @@ function checkPassword() {
 
     let password = document.getElementById("password").value;
     let score = 0;
-let hasSequence = false;
-
-for (let i = 0; i < password.length - 2; i++) {
-    let a = password.charCodeAt(i);
-    let b = password.charCodeAt(i + 1);
-    let c = password.charCodeAt(i + 2);
-
-    if ((b === a + 1 && c === b + 1) ||
-        (b === a - 1 && c === b - 1)) {
-        hasSequence = true;
-        break;
-    }
-}
-
-if (hasSequence) {
-    messages.push("⚠️ Sequential Pattern: Detected");
-} else {
-    messages.push("✓ Sequential Pattern: Not Detected");
-}
-
-    
     let analysis = "";
 
     if (password.length === 0) {
@@ -30,20 +9,48 @@ if (hasSequence) {
             "Please enter a password.";
         document.getElementById("analysis").innerHTML = "";
         document.getElementById("strength-fill").style.width = "0%";
+        document.getElementById("strength-percent").innerText = "0%";
         return;
     }
 
     let lowerPassword = password.toLowerCase();
 
+    // Common Password Detection
     if (
         lowerPassword === "password" ||
         lowerPassword === "123456" ||
         lowerPassword === "qwerty" ||
         lowerPassword === "admin"
     ) {
-        analysis += "Warning: This is a common password!<br><br>";
+        analysis += "⚠️ Warning: This is a common password!<br><br>";
     }
 
+    // Sequential Pattern Detection
+    let hasSequence = false;
+
+    for (let i = 0; i < password.length - 2; i++) {
+        let a = password.charCodeAt(i);
+        let b = password.charCodeAt(i + 1);
+        let c = password.charCodeAt(i + 2);
+
+        if (
+            (b === a + 1 && c === b + 1) ||
+            (b === a - 1 && c === b - 1)
+        ) {
+            hasSequence = true;
+            break;
+        }
+    }
+
+    if (hasSequence) {
+        analysis += "⚠️ Sequential Pattern: Detected<br>";
+    } else {
+        analysis += "✓ Sequential Pattern: Not Detected<br>";
+    }
+
+    analysis += "<br>";
+
+    // Length
     if (password.length >= 8) {
         score++;
         analysis += "✓ Length: Good<br>";
@@ -51,6 +58,7 @@ if (hasSequence) {
         analysis += "✗ Length: Too Short<br>";
     }
 
+    // Uppercase
     if (/[A-Z]/.test(password)) {
         score++;
         analysis += "✓ Uppercase: Good<br>";
@@ -58,6 +66,7 @@ if (hasSequence) {
         analysis += "✗ Uppercase: Missing<br>";
     }
 
+    // Lowercase
     if (/[a-z]/.test(password)) {
         score++;
         analysis += "✓ Lowercase: Good<br>";
@@ -65,6 +74,7 @@ if (hasSequence) {
         analysis += "✗ Lowercase: Missing<br>";
     }
 
+    // Number
     if (/[0-9]/.test(password)) {
         score++;
         analysis += "✓ Number: Good<br>";
@@ -72,6 +82,7 @@ if (hasSequence) {
         analysis += "✗ Number: Missing<br>";
     }
 
+    // Special Character
     if (/[^a-zA-Z0-9]/.test(password)) {
         score++;
         analysis += "✓ Special Character: Good<br>";
@@ -79,6 +90,7 @@ if (hasSequence) {
         analysis += "✗ Special Character: Missing<br>";
     }
 
+    // Strength
     let strength;
     let colorClass;
     let barWidth;
@@ -97,21 +109,33 @@ if (hasSequence) {
         barWidth = "100%";
     }
 
+    // Strength Bar
     document.getElementById("strength-fill").style.width = barWidth;
-    document.getElementById("strength-percent").innerText = barWidth;
+
+    document.getElementById("strength-percent").innerText =
+        barWidth;
+
     document.getElementById("strength-fill").style.background =
         colorClass === "weak" ? "red" :
-        colorClass === "medium" ? "orange" : "green";
+        colorClass === "medium" ? "orange" :
+        "green";
 
+    // Result
     document.getElementById("result").innerHTML =
         'Password Strength: <span class="' + colorClass + '">' +
-        strength + '</span><br>' +
+        strength +
+        '</span><br>' +
         "Score: " + score + "/5";
 
+    // Analysis
     document.getElementById("analysis").innerHTML =
         "<br>Password Analysis:<br><br>" + analysis;
 }
+
+
+// Show / Hide Password
 function togglePassword() {
+
     const password = document.getElementById("password");
 
     if (password.type === "password") {
@@ -120,7 +144,11 @@ function togglePassword() {
         password.type = "password";
     }
 }
+
+
+// Dark / Light Mode
 function toggleTheme() {
+
     document.body.classList.toggle("dark-mode");
 
     const button = document.querySelector(".theme-button");
