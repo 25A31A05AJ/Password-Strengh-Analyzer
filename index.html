@@ -10,6 +10,8 @@
 
 <body>
 
+    <button class="theme-button" onclick="toggleTheme()">🌙 Dark Mode</button>
+
     <div class="container">
 
         <h1>Password Strength Analyzer</h1>
@@ -17,17 +19,20 @@
         <p>Enter your password to check its strength</p>
 
         <div class="password-box">
-    <input type="password" id="password" placeholder="Enter your password">
-    <button type="button" onclick="togglePassword()">👁️</button>
-</div>
+            <input type="password" id="password" placeholder="Enter your password">
+            <button type="button" onclick="togglePassword()">👁️</button>
+        </div>
 
         <button onclick="checkPassword()">Check Strength</button>
-<div class="strength-bar">
-    <div id="strength-fill"></div>
-</div>
 
-<div id="strength-percent">0%</div>
+        <div class="strength-bar">
+            <div id="strength-fill"></div>
+        </div>
+
+        <div id="strength-percent">0%</div>
+
         <div id="result"></div>
+
         <div id="analysis"></div>
 
     </div>
